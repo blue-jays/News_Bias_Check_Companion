@@ -1,0 +1,119 @@
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+
+# --- Editors/IDEs ---
+.vscode/
+.idea/
+*.code-workspace
+
+# --- Python bytecode / caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.cache/
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
+.pyright/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+.conda/
+conda-env/
+.python-version
+
+# --- Packaging / build ---
+build/
+dist/
+downloads/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+wheels/
+share/python-wheels/
+pip-wheel-metadata/
+*.manifest
+*.spec
+
+# --- Logs & reports ---
+logs/
+*.log
+*.out
+*.err
+htmlcov/
+coverage.xml
+.coverage
+.coverage.*
+
+# --- Notebooks ---
+.ipynb_checkpoints/
+*.ipynb
+
+# --- Data & artifacts (use DVC/MLflow to track) ---
+data/**
+!data/.gitkeep
+!data/README.md
+artifacts/**
+!artifacts/.gitkeep
+models/**
+!models/.gitkeep
+*.pt
+*.bin
+*.h5
+*.onnx
+mlruns/
+mlartifacts/
+
+# --- Databases / caches ---
+*.db
+*.sqlite
+*.sqlite3
+**/cache/
+transformers_cache/
+datasets/
+.huggingface/
+
+# --- App env / secrets ---
+.env
+.env.*
+!.env.example
+*.envrc
+.direnv/
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+*.der
+secrets.json
+service_account.json
+
+# --- DVC (keep config, ignore heavy caches) ---
+.dvc/cache/
+.dvc/tmp/
+.dvc/lock
+
+# --- FastAPI/Uvicorn ---
+uvicorn.log
+
+# --- Node/JS (for extension or frontends) ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+**/.next/
+**/dist/
+**/build/
+**/.parcel-cache/
+**/.vite/
+
+# --- Docker runtime data (optional) ---
+docker-data/
