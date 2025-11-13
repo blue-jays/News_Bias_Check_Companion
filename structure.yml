@@ -1,131 +1,141 @@
 project_root: .
+
 entries:
 
-  # --- Root Files ---
+  # -------------------------
+  # Root files
+  # -------------------------
   - file: README.md
+  - file: requirements.txt
+  - file: pyproject.toml
   - file: Dockerfile
   - file: compose.yaml
   - file: Makefile
   - file: .gitignore
+  - file: .dockerignore
   - file: .env.sample
-  - file: requirements.txt
-  - file: pyproject.toml
-  - file: .pre-commit-config.yaml
-  - file: .editorconfig
 
-  # --- GitHub Workflows ---
-  - dir: .github/workflows
-  - file: .github/workflows/ci.yml
-  - file: .github/workflows/nightly-fetch.yml
-
-  # --- Documentation ---
-  - dir: docs/adr
-  - file: docs/architecture.md
-  - file: docs/api-contract.md
-  - file: docs/data-contract.md
-
-  # --- Configs ---
+  # -------------------------
+  # Configurations
+  # -------------------------
   - dir: configs
   - file: configs/app.yaml
   - file: configs/sources.yaml
   - file: configs/bias_maps.yaml
+  - file: configs/logging.yaml
+  - file: configs/prometheus.yaml
 
-  # --- Resources ---
+  # -------------------------
+  # Bias Map Resources
+  # -------------------------
   - dir: resources/bias_maps
   - file: resources/bias_maps/allsides_bias_map.csv
   - file: resources/bias_maps/adfontes_bias_map.csv
 
-  # --- Data ---
-  - dir: data/{raw,external,interim,processed}
-
-  # --- Validation (Great Expectations) ---
-  - dir: validation/great_expectations/expectations
-  - dir: validation/great_expectations/checkpoints
-  - file: validation/great_expectations/great_expectations.yml
-  - file: validation/great_expectations/expectations/articles_schema.json
-  - file: validation/great_expectations/expectations/outlets_reference.json
-  - file: validation/great_expectations/checkpoints/nightly_ingestion.yml
-
-  # --- Monitoring (Evidently + Prometheus) ---
-  - dir: monitoring/evidently/{profiles,reports}
-  - dir: infra/monitoring
-  - file: infra/monitoring/prometheus.yml
-  - dir: infra/grafana/dashboards
-  - file: infra/grafana/dashboards/bias_dashboard.json
-
-  # --- MLflow (optional) ---
-  - dir: mlflow
-
-  # --- Notebooks ---
-  - dir: notebooks
-  - file: notebooks/01_article_clustering.ipynb
-  - file: notebooks/02_bias_score_experiment.ipynb
-
-  # --- Scripts ---
-  - dir: scripts
-  - file: scripts/bootstrap_db.py
-  - file: scripts/load_bias_maps.py
-  - file: scripts/dev_server.sh
-    mode: "755"
-
-  # --- FastAPI App ---
-  - dir: src/app/{api,routers,service,db,telemetry}
-  - file: src/app/api/main.py
-  - file: src/app/routers/analyze.py
-  - file: src/app/routers/sources.py
-  - file: src/app/health.py
-  - file: src/app/service/clustering.py
-  - file: src/app/service/bias_scorer.py
-  - file: src/app/service/summarizer.py
-  - file: src/app/db/articles.py
-  - file: src/app/db/sources.py
-  - dir: src/app/db/migrations
-  - file: src/app/telemetry/metrics.py
-  - file: src/app/telemetry/logging_config.py
-  - file: src/app/settings.py
-  - file: src/app/schemas.py
-  - file: src/app/deps.py
-
-  # --- ML Layer ---
-  - dir: src/ml/{data,features,models,utils,drift}
-  - file: src/ml/data/fetch_articles.py
-  - file: src/ml/data/extract_topics.py
-  - file: src/ml/features/sentiment.py
-  - file: src/ml/models/rank_bias.py
-  - file: src/ml/utils/vectorizer.py
-  - file: src/ml/utils/logger.py
-  - file: src/ml/utils/contracts.py
-  - file: src/ml/drift/evidently_runner.py
-  - file: src/ml/drift/evidently_exporter.py
-
-  # --- Pipelines ---
-  - dir: src/pipelines
-  - file: src/pipelines/ingest.py
-  - file: src/pipelines/preprocess.py
-  - file: src/pipelines/evaluate.py
-  - file: src/pipelines/register.py
-
-  # --- Orchestrators ---
-  - dir: src/orchestrators/actions
-  - file: src/orchestrators/actions/nightly_fetch.py
-
-  # --- CLI (Typer) ---
-  - dir: src/cli
-  - file: src/cli/main.py
-
-  # --- Tests ---
-  - dir: tests/{unit,integration,e2e}
-
-  # --- Chrome Extension ---
-  - dir: extension/assets/icons
+  # -------------------------
+  # Chrome Extension
+  # -------------------------
+  - dir: extension
   - file: extension/manifest.json
   - file: extension/background.js
   - file: extension/content_script.js
   - file: extension/popup.html
   - file: extension/popup.js
-  - file: extension/options.html
-  - file: extension/options.js
   - file: extension/styles.css
+  - dir: extension/assets/icons
   - file: extension/assets/icons/16.png
   - file: extension/assets/icons/48.png
   - file: extension/assets/icons/128.png
+
+  # -------------------------
+  # FastAPI Backend
+  # -------------------------
+  - dir: src/app/api
+  - file: src/app/api/main.py
+  - file: src/app/api/schemas.py
+
+  - dir: src/app/telemetry
+  - file: src/app/telemetry/logging_config.py
+  - file: src/app/telemetry/metrics.py
+
+  - file: src/app/settings.py
+
+  # -------------------------
+  # ML Pipeline (renamed)
+  # -------------------------
+  - dir: src/ml/ingest
+  - file: src/ml/ingest/fetch_articles.py
+
+  - dir: src/ml/preprocess
+  - file: src/ml/preprocess/clean_normalize.py
+
+  - dir: src/ml/validate
+  - file: src/ml/validate/run_checks.py
+
+  - dir: src/ml/features
+  - file: src/ml/features/sentiment_vader.py
+  - file: src/ml/features/embeddings_sbert.py
+
+  - dir: src/ml/model
+  - file: src/ml/model/cluster_kmeans.py
+  - file: src/ml/model/bias_scorer.py
+
+  - dir: src/ml/aggregate
+  - file: src/ml/aggregate/build_view.py
+
+  - dir: src/ml/utils
+  - file: src/ml/utils/bias_mapping.py
+  - file: src/ml/utils/normalization.py
+
+  # -------------------------
+  # CLI Pipeline
+  # -------------------------
+  - dir: src/cli
+  - file: src/cli/main.py
+
+  # -------------------------
+  # Models
+  # -------------------------
+  - dir: models
+  - dir: models/sbert_cache
+  - file: models/sbert_cache/README.md
+
+  # -------------------------
+  # Great Expectations
+  # -------------------------
+  - dir: validation/great_expectations
+  - file: validation/great_expectations/great_expectations.yml
+
+  - dir: validation/great_expectations/expectations
+  - file: validation/great_expectations/expectations/ingest_suite.json
+  - file: validation/great_expectations/expectations/preprocess_suite.json
+  - file: validation/great_expectations/expectations/aggregate_output_suite.json
+
+  - dir: validation/great_expectations/checkpoints
+  - file: validation/great_expectations/checkpoints/ingest.yml
+  - file: validation/great_expectations/checkpoints/preprocess.yml
+  - file: validation/great_expectations/checkpoints/aggregate_output.yml
+
+  # -------------------------
+  # Monitoring (Evidently + Prometheus)
+  # -------------------------
+  - dir: monitoring/evidently/profiles
+  - dir: monitoring/evidently/reports
+  - file: monitoring/evidently/run_drift_report.py
+
+  - dir: infra/monitoring
+  - file: infra/monitoring/prometheus.yml
+
+  # -------------------------
+  # Data directories
+  # -------------------------
+  - dir: data/raw
+  - dir: data/processed
+  - dir: data/reference
+
+  # -------------------------
+  # GitHub Workflows
+  # -------------------------
+  - dir: .github/workflows
+  - file: .github/workflows/ci.yml
+  - file: .github/workflows/nightly-drift.yml
