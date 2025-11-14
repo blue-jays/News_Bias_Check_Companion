@@ -118,3 +118,4 @@ pnpm-debug.log*
 
 # --- Docker runtime data (optional) ---
 docker-data/
+*.jpg
