@@ -21,6 +21,9 @@ The result is a complete, data-driven snapshot of how different outlets frame th
 
 ---
 
+## Architecture
+![Full System Archtecture](Docs/full_architecture/System_design.png)
+
 ## Key Features
 
 ### Chrome Extension UI
