@@ -1,0 +1,5 @@
+# What is this class  Settings Base Settings ? 
+- It is a class that has everything that we need to make the Settings object.
+- It tells what is the settings of the production, and it reads from the .env also
+
+- then we call the settings class to make an object.

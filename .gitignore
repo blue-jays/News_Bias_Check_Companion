@@ -58,7 +58,10 @@ coverage.xml
 *.ipynb
 
 # --- Data & artifacts (use DVC/MLflow to track) ---
-data/**
+# data/** -->> Ignore everything after data, anywhere.
+# !data/file --> Exception, track this one.
+
+data/**             
 !data/.gitkeep
 !data/README.md
 artifacts/**
@@ -119,3 +122,6 @@ pnpm-debug.log*
 # --- Docker runtime data (optional) ---
 docker-data/
 *.jpg
+
+
+# ** means, any type of file, at any depth.
