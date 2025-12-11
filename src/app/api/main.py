@@ -56,6 +56,7 @@ def _fake_pipeline(article_url: str) -> BiasAnalysisResponse:
             final_bias_score=0.7,
             sentiment=0.3,
             cluster_id=2,
+            #kjkfdjfkj
         ),
     ]
 
